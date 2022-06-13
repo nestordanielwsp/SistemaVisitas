@@ -1,0 +1,3 @@
+#tbVisitas_wrapper > div:nth-child(2) > div{
+    overflow-x: auto;
+}

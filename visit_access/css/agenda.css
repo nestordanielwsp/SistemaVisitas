@@ -1,0 +1,17 @@
+span.modalFilter{
+    font-size: 10px;
+    color: #4298b5;
+    background-color: #FFF;
+    border:2px solid #4298b5;
+    cursor:pointer;
+}
+#tbVisitas > tbody > tr > td:nth-child(2),#tbVisitas > tbody > tr > td:nth-child(5){
+    text-transform: capitalize;
+}
+body.sidenav-toggled div.app-sidebar__user-avatar{
+    zoom: 60%;
+}
+
+#tbVisitas_wrapper > div:nth-child(2) > div{
+    overflow-x: auto;
+}

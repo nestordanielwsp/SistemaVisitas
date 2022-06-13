@@ -1,0 +1,162 @@
+<html lang="en">
+<head>
+    <meta name="description" content="">
+    <title>VISIT ACCESS</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" href="css/fontMagna.css" />
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <!-- Flexdatalist css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-flexdatalist/2.2.4/jquery.flexdatalist.min.css" />
+    <link rel="stylesheet" href="css/agenda.css" />
+</head>
+
+<body class="app sidebar-mini rtl  pace-done">
+    <div class="pace  pace-inactive">
+        <div class="pace-progress" data-progress-text="100%" data-progress="99"
+            style="transform: translate3d(100%, 0px, 0px);">
+            <div class="pace-progress-inner"></div>
+        </div>
+        <div class="pace-activity"></div>
+    </div>
+    <!-- Navbar-->
+    <header class="app-header"><a class="app-header__logo d-flex align-items-center justify-content-center"
+            href="index.html"><span class="icon-magna" style="font-size:36px"><span class="path1"></span><span
+                    class="path2"></span><span class="path3"></span><span class="path4"></span><span
+                    class="path5"></span><span class="path6"></span><span class="path7"></span><span
+                    class="path8"></span><span class="path9"></span></span></a>
+        <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
+            aria-label="Hide Sidebar"></a>
+        <!-- Navbar Right Menu-->
+        <ul class="app-nav">
+            <!-- User Menu-->
+            <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" style="font-size: 20px;"
+                    aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
+                <ul class="dropdown-menu settings-menu dropdown-menu-right">
+                    <li><a class="dropdown-item" href="./Login.html"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
+                </ul>
+            </li>
+            <!-- <li class="dropdown"><a class="app-nav__item" href="#" target="_blank"
+                style="font-size: 20px;"><i class="fa fa-question-circle fa-lg"></i></a>
+            </li> -->
+        </ul>
+    </header>
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside class="app-sidebar">
+        <div class="app-sidebar__user">
+            <div class="app-sidebar__user-avatar d-flex justify-content-around cover-image font-weight-bold px-2"
+                 style="width: 50px;height: 50px;background: #db7b74;background-size: cover;background-position: center;font-size: 20px;color: #fff;line-height: 50px;font-family: serif;"></div>
+            <div>
+                <p class="app-sidebar__user-name">Cargando...</p>
+                <p class="app-sidebar__user-designation">Cargando...</p>
+            </div>
+        </div>
+        <ul class="app-menu">
+            <li><a class="app-menu__item active" data-tab="#tabVisitas" href="#"><i class="app-menu__icon fa fa-dashboard"></i><span
+                        class="app-menu__label">Visiting schedule</span></a></li>
+        </ul>
+    </aside>
+    <main class="app-content">
+        <div id="tabVisitas" class="active">
+            <div class="app-title">
+                <div>
+                    <h1><i class="fa fa-list-alt"></i> Visiting schedule</h1>
+                </div>
+                <ul class="app-breadcrumb breadcrumb">
+                    <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+                    <li class="breadcrumb-item"><a href="#">Visiting schedule</a></li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tile mb-2">
+                        <div class="tile-body">
+                            <div class="row">
+                                <div class="col-7">
+                                    <span onclick="handleOpenModal('filters')">
+                                        <button class="btn btn-outline-primary btn-sm" type="button"><span class="fa fa-filter m-0"></span></button>
+                                        <span class="badge badge-primary p-2 mr-1">
+                                            <span id="txt_finicio">01/02/2020</span> - <span id="txt_ffin">29/02/2020</span>
+                                        </span>
+                                    </span>
+                                </div>
+                                <div class="col-5 text-right">
+                                    <button class="btn btn-danger btn-sm px-3" onclick="handleOpenModal('new-visit')" type="button"><span class="fa fa-plus m-0"></span> Visit / Supplier</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile">
+                        <div class="tile-body">
+                            <table class="table table-hover table-bordered table-striped" id="tbVisitas" style="width: 100%;">
+                                <thead>
+                                  <tr>
+                                    <th>Folio</th>
+                                    <th>Visit / Supplier</th>
+                                    <th>Company</th>
+                                    <th>Sec. Badge</th>
+                                    <th>Contact</th>
+                                    <th>IT Devices</th>
+                                    <th>Visit Date</th>
+                                    <th>Entry</th>
+                                    <th>Out</th>
+                                    <th>-</th>
+                                  </tr>
+                                </thead>
+                                <tbody></tbody>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Modal -->
+    <div class="modal fade" id="modalito" tabindex="-1" data-backdrop="static" ></div>
+    <!-- Essential javascripts for application to work-->
+    <script src="./js/jquery-3.2.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/main.js"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script src="./js/plugins/pace.min.js"></script>
+    <!-- Flex Data List Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-flexdatalist/2.2.4/jquery.flexdatalist.min.js"></script>
+    <!-- Data table plugin-->
+    <script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <!-- Moment plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+            integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+            crossorigin="anonymous"></script>
+    <!-- Axios plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
+            integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
+            crossorigin="anonymous"></script>
+    <!-- Sweet Alert plugin -->
+    <script type="text/javascript" src="js/plugins/sweetalert.min.js"></script>
+    <!-- CONFIGURATION -->
+    <script src="./js/config.js?v=1.0.7"></script>
+    <!-- CUSTOM -->
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            const scripts = [
+                `./js/agenda.js?v=${VERSION}`
+            ];
+            scripts.forEach(script => {
+                if(document.querySelector(`script[src="${script}"]`) == null){
+                    const scriptCreate = document.createElement('script');
+                    scriptCreate.src = script;
+                    document.querySelector('html > body').append(scriptCreate);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

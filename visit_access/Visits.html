@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>VISIT ACCESS</title>
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" href="css/fontMagna.css" />
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <!-- Flexdatalist css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-flexdatalist/2.2.4/jquery.flexdatalist.min.css" />
+    <link rel="stylesheet" href="css/visitas.css" />
+</head>
+<body class="app sidebar-mini rtl  pace-done">
+    <div class="pace  pace-inactive">
+        <div class="pace-progress" data-progress-text="100%" data-progress="99"
+            style="transform: translate3d(100%, 0px, 0px);">
+            <div class="pace-progress-inner"></div>
+        </div>
+        <div class="pace-activity"></div>
+    </div>
+    <!-- Navbar-->
+    <header class="app-header">
+        <a class="app-header__logo d-flex align-items-center justify-content-center" href="#">
+            <span class="icon-magna" style="font-size:36px"><span class="path1"></span><span
+                class="path2"></span><span class="path3"></span><span class="path4"></span><span
+                class="path5"></span><span class="path6"></span><span class="path7"></span><span
+                class="path8"></span><span class="path9"></span></span>
+        </a>
+        <!-- Sidebar toggle button-->
+        <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+        <!-- Navbar Right Menu-->
+        <ul class="app-nav">
+            <!-- User Menu-->
+            <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" style="font-size: 20px;"
+                    aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
+                <ul class="dropdown-menu settings-menu dropdown-menu-right">
+                    <li><a class="dropdown-item" href="./login.html"><i class="fa fa-sign-out fa-lg"></i> Logout</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </header>
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside class="app-sidebar">
+        <div class="app-sidebar__user">
+            <div class="app-sidebar__user-avatar d-flex justify-content-around cover-image font-weight-bold px-2"
+                 style="width: 50px;height: 50px;background: #db7b74;background-size: cover;background-position: center;font-size: 20px;color: #fff;line-height: 50px;font-family: serif;"></div>
+            <div>
+                <p class="app-sidebar__user-name">Loading...</p>
+                <p class="app-sidebar__user-designation">Loading...</p>
+            </div>
+        </div>
+        <ul class="app-menu">
+            <li><a class="app-menu__item active" data-tab="#tabVisitas" href="#"><i class="app-menu__icon fa fa-dashboard"></i><span
+                        class="app-menu__label">Visits - Suppliers</span></a></li>
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                        class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Setting</span><i
+                        class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu" id="menuConfig">
+                    <li><a class="treeview-item" href="./Schedule.html">
+                        <i class="icon fa fa-circle-o"></i> Go to visit schedule</a></li>
+                    <li><a class="treeview-item" href="#" onclick="fnCargarDatosCompanies()" data-tab="#tabCatCompanies">
+                        <i class="icon fa fa-circle-o"></i> Companies</a></li>
+                    <li><a class="treeview-item" href="#" onclick="fnCargarDatosSecBadges()" data-tab="#tabCatGafetes">
+                        <i class="icon fa fa-circle-o"></i> Security Badges</a></li>
+                    <li><a class="treeview-item" href="#" onclick="fnCargarDatosDocuments()" data-tab="#tabCatID">
+                        <i class="icon fa fa-circle-o"></i> ID Cards</a></li>
+                    <li><a class="treeview-item" href="#" onclick="fnCargarDatosDeviceTypes()" data-tab="#tabCatTiposDisp">
+                        <i class="icon fa fa-circle-o"></i> Device Types</a></li>
+                    <li><a class="treeview-item" href="#" onclick="fnCargarDatosVisitorTypes()" data-tab="#tabCatTipoVisita">
+                        <i class="icon fa fa-circle-o"></i> Type of visit / supplier</a></li>
+                    <li><a class="treeview-item" href="#" onclick="fnCargarDatosSecCourses()" data-tab="#tabCatCursos">
+                        <i class="icon fa fa-circle-o"></i> Safety courses</a></li>
+
+                </ul>
+            </li>
+        </ul>
+    </aside>
+    <main class="app-content">
+        <div id="tabVisitas" class="active">
+            <div class="app-title">
+                <div>
+                    <h1><i class="fa fa-list-alt"></i> Visits / Suppliers</h1>
+                </div>
+                <ul class="app-breadcrumb breadcrumb">
+                    <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+                    <li class="breadcrumb-item"><a href="#">Visits - Suppliers</a></li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tile mb-2">
+                        <div class="tile-body">
+                            <div class="row">
+                                <div class="col-7" onclick="handleOpenModal('filters')">
+                                    <button class="btn btn-outline-primary btn-sm" type="button">
+                                        <span class="fa fa-filter m-0"></span>
+                                    </button>
+                                    <span class="badge badge-primary p-2 mr-1" style="font-size: 10px;color: #4298b5; background-color: #FFF;border:2px solid #4298b5;cursor:pointer;">
+                                        <span id="txt_finicio">01/02/2020</span> - <span id="txt_ffin">29/02/2020</span>
+                                    </span>
+                                </div>
+                                <div class="col-5 text-right">
+                                    <button class="btn btn-danger btn-sm px-3" onclick="handleOpenModal('new-visit')" type="button"><span class="fa fa-plus m-0"></span> Visit / Supplier</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile">
+                        <div class="tile-body">
+                            <table class="table table-hover table-bordered table-striped"" id="tbVisitas" style="width: 100%;">
+                                <thead>
+                                  <tr>
+                                    <th width="80px">Folio</th>
+                                    <th>Visit / Supplier</th>
+                                    <th>Company</th>
+                                    <th>Gafete</th>
+                                    <th>Magna Contact</th>
+                                    <th>IT Device</th>
+                                    <th>Visit Date</th>
+                                    <th>Entry</th>
+                                    <th>Out</th>
+                                  </tr>
+                                </thead>
+                                <tbody></tbody>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="tabCatCompanies">
+            <div class="app-title">
+                <div>
+                    <h1><i class="fa fa-list-alt"></i> Companies</h1>
+                </div>
+                <ul class="app-breadcrumb breadcrumb">
+                    <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+                    <li class="breadcrumb-item"><a href="#">Loading...</a></li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tile mb-2">
+                        <div class="tile-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <button class="btn btn-danger btn-sm px-3" onclick="handleOpenModal('new-company')" type="button"><span class="fa fa-plus m-0"></span> New Company</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile">
+                        <div class="tile-body">
+                            <table class="table  table-hover table-bordered table-striped"" id="tbCompanies" style="width: 100%;">
+                                <thead>
+                                  <tr>
+                                    <th width="80px">Folio</th>
+                                    <th>Company</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                  </tr>
+                                </thead>
+                                <tbody></tbody>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="tabCatGafetes">
+            <div class="app-title">
+                <div>
+                    <h1><i class="fa fa-list-alt"></i> Security Badges</h1>
+                </div>
+                <ul class="app-breadcrumb breadcrumb">
+                    <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+                    <li class="breadcrumb-item"><a href="#">Loading...</a></li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tile mb-2">
+                        <div class="tile-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <button class="btn btn-danger btn-sm px-3" onclick="handleOpenModal('new-gafete')" type="button"><span class="fa fa-plus m-0"></span> New Security Badge</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile">
+                        <div class="tile-body">
+                            <table class="table  table-hover table-bordered table-striped"" id="tbGafetes" style="width: 100%;">
+                                <thead>
+                                  <tr>
+                                    <th width="80px">Folio</th>
+                                    <th>Security Badge</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                  </tr>
+                                </thead>
+                                <tbody></tbody>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="tabCatID">
+            <div class="app-title">
+                <div>
+                    <h1><i class="fa fa-list-alt"></i> ID Cards</h1>
+                </div>
+                <ul class="app-breadcrumb breadcrumb">
+                    <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+                    <li class="breadcrumb-item"><a href="#">Loading...</a></li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tile mb-2">
+                        <div class="tile-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <button class="btn btn-danger btn-sm px-3" onclick="handleOpenModal('new-document')" type="button"><span class="fa fa-plus m-0"></span> New ID Card</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile">
+                        <div class="tile-body">
+                            <table class="table  table-hover table-bordered table-striped"" id="tbIDCards" style="width: 100%;">
+                                <thead>
+                                  <tr>
+                                    <th width="80px">Folio</th>
+                                    <th>ID Card</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                  </tr>
+                                </thead>
+                                <tbody></tbody>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="tabCatTiposDisp">
+            <div class="app-title">
+                <div>
+                    <h1><i class="fa fa-list-alt"></i> Device Types</h1>
+                </div>
+                <ul class="app-breadcrumb breadcrumb">
+                    <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+                    <li class="breadcrumb-item"><a href="#">Loading...</a></li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tile mb-2">
+                        <div class="tile-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <button class="btn btn-danger btn-sm px-3" onclick="handleOpenModal('new-device')" type="button"><span class="fa fa-plus m-0"></span> New Device Type</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile">
+                        <div class="tile-body">
+                            <table class="table  table-hover table-bordered table-striped"" id="tbDeviceType" style="width: 100%;">
+                                <thead>
+                                  <tr>
+                                    <th width="80px">Folio</th>
+                                    <th>Device type</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                  </tr>
+                                </thead>
+                                <tbody></tbody>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="tabCatTipoVisita">
+            <div class="app-title">
+                <div>
+                    <h1><i class="fa fa-list-alt"></i> Type of visit / supplier</h1>
+                </div>
+                <ul class="app-breadcrumb breadcrumb">
+                    <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+                    <li class="breadcrumb-item"><a href="#">Loading...</a></li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tile mb-2">
+                        <div class="tile-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <button class="btn btn-danger btn-sm px-3" onclick="handleOpenModal('new-visitorType')" type="button"><span class="fa fa-plus m-0"></span> New Type</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile">
+                        <div class="tile-body">
+                            <table class="table  table-hover table-bordered table-striped"" id="tbTipoVisita" style="width: 100%;">
+                                <thead>
+                                  <tr>
+                                    <th width="80px">Folio</th>
+                                    <th>Type</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                  </tr>
+                                </thead>
+                                <tbody></tbody>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="tabCatCursos">
+            <div class="app-title">
+                <div>
+                    <h1><i class="fa fa-list-alt"></i> Safety courses</h1>
+                </div>
+                <ul class="app-breadcrumb breadcrumb">
+                    <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+                    <li class="breadcrumb-item"><a href="#">Loading...</a></li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tile mb-2">
+                        <div class="tile-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <button class="btn btn-danger btn-sm px-3" onclick="handleOpenModal('new-secCourse')" type="button"><span class="fa fa-plus m-0"></span> New Course</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile">
+                        <div class="tile-body">
+                            <table class="table  table-hover table-bordered table-striped"" id="tbCursoSeg" style="width: 100%;">
+                                <thead>
+                                  <tr>
+                                    <th width="80px">Folio</th>
+                                    <th>Course</th>
+                                    <th>File Name</th>
+                                    <th>Registration</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                  </tr>
+                                </thead>
+                                <tbody></tbody>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Modal -->
+    <div class="modal fade" id="modalito" tabindex="-1" data-backdrop="static" ></div>
+    <!-- Essential javascripts for application to work-->
+    <script src="./js/jquery-3.2.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/main.js"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script src="./js/plugins/pace.min.js"></script>
+    <!-- Flex Data List Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-flexdatalist/2.2.4/jquery.flexdatalist.min.js"></script>
+    <!-- Data table plugin-->
+    <script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <!-- Moment plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+    integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+    crossorigin="anonymous"></script>
+    <!-- Axios plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
+    integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
+    crossorigin="anonymous"></script>
+    <!-- Sweet Alert plugin -->
+    <script type="text/javascript" src="js/plugins/sweetalert.min.js"></script>
+    <!-- CONFIGURATION -->
+    <script src="./js/config.js?v=1.0.7"></script>
+    <!-- CUSTOM -->
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+                const scripts = [
+                    `./js/visitas.js?v=${VERSION}`
+                ];
+                scripts.forEach(script => {
+                    if(document.querySelector(`script[src="${script}"]`) == null){
+                        const scriptCreate = document.createElement('script');
+                        scriptCreate.src = script;
+                        document.querySelector('html > body').append(scriptCreate);
+                    }
+                });
+        });
+    </script>
+</body>
+</html>

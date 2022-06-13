@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" href="css/fontMagna.css" />
+    <!-- Font-icon css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="css/login.css" />
+    <title>Login - Visit & Supplier</title>
+</head>
+
+<body class="pace-done">
+    <div class="pace  pace-inactive">
+        <div class="pace-progress" data-progress-text="100%" data-progress="99"
+            style="transform: translate3d(100%, 0px, 0px);">
+            <div class="pace-progress-inner"></div>
+        </div>
+        <div class="pace-activity"></div>
+    </div>
+    <section class="material-half-bg">
+        <div class="cover"></div>
+    </section>
+    <section class="login-content">
+        <div class="logo">
+            <h1 style="font-family: fantasy;text-transform: uppercase;">
+                access of visits or suppliers
+            </h1>
+        </div>
+        <div class="login-box">
+            <form class="login-form" onsubmit="event.preventDefault(); handleLogin();">
+                <h3 class="login-head"><span class="icon-magna" style="font-size:36px"><span class="path1"></span><span
+                            class="path2"></span><span class="path3"></span><span class="path4"></span><span
+                            class="path5"></span><span class="path6"></span><span class="path7"></span><span
+                            class="path8"></span><span class="path9"></span></span></h3>
+                <div class="form-group">
+                    <label class="control-label">USER WINDOWS</label>
+                    <input class="form-control" id="txtUser" type="text" placeholder="User" autofocus="">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">PASSWORD</label>
+                    <input class="form-control" id="txtPass" type="password" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <div class="utility">
+                        <div class="animated-checkbox">
+                            <label class=" d-none">
+                                <input type="checkbox"><span class="label-text">Stay Signed in</span>
+                            </label>
+                        </div>
+                        <p class="semibold-text mb-2 d-none"><a href="#" data-toggle="flip">Forgot Password ?</a></p>
+                    </div>
+                </div>
+                <div class="form-group btn-container">
+                    <button type="submit" class="btn btn-primary btn-block" id="btnIniciaSession"><i
+                            class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <!-- loading  -->
+	<div style="position: absolute; top: .1%; width: 100%; height: calc(100% - 1px); background: rgba(146,146,146,.18); z-index: 100000000000;display:none;">
+		<div id="wait" style="position:absolute;top:50%;left:47%;padding:2px;"></div>
+	</div>
+    <!-- Essential javascripts for application to work-->
+    <script src="./js/jquery-3.2.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/main.js"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script src="./js/plugins/pace.min.js"></script>
+    <!-- Axios plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
+        integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
+        crossorigin="anonymous"></script>
+    <!-- Sweet Alert plugin -->
+    <script type="text/javascript" src="js/plugins/sweetalert.min.js"></script>
+    <!-- CONFIGURATION -->
+    <script src="./js/config.js?v1=1.0.7"></script>
+    <!-- CUSTOM -->
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            const scripts = [
+                `./js/acceso.js?v=${VERSION}`
+            ];
+            scripts.forEach(script => {
+                if(document.querySelector(`script[src="${script}"]`) == null){
+                    const scriptCreate = document.createElement('script');
+                    scriptCreate.src = script;
+                    document.querySelector('html > body').append(scriptCreate);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
