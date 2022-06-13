@@ -4,8 +4,23 @@ using API_Configuration.Interfaces;
 using API_Configuration.Middleware;
 using API_Configuration.Services;
 using Microsoft.EntityFrameworkCore;
+ 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(MyAllowSpecificOrigins,
+                          policy =>
+                          {
+                              policy.WithOrigins("http://est03des.magna.global",
+                                                  "http://127.0.0.1:5500")
+                                                  .AllowAnyHeader()
+                                                  .AllowAnyMethod();
+                          });
+});
+
 
 //public IConfiguration Configuration { get;}
 

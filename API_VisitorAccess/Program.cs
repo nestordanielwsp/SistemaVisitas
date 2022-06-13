@@ -2,7 +2,21 @@
 using API_VisitorAccess.Data;
 using System.Text.Json.Serialization;
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(MyAllowSpecificOrigins,
+                          policy =>
+                          {
+                              policy.WithOrigins("http://est03des.magna.global",
+                                                  "http://127.0.0.1:5500")
+                                                  .AllowAnyHeader()
+                                                  .AllowAnyMethod();
+                          });
+});
 
 builder.Services.AddDbContext<API_VisitorAccessContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("API_VisitorAccessContext")));
@@ -25,3 +39,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+ 
