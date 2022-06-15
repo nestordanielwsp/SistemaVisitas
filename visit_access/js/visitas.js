@@ -1032,7 +1032,7 @@ const handleSaveAssignSecBadge = (visitRecordId) => {
     const securityBadgeId = document.querySelector('#txtModalGafete').value.trim();
     const documentId = document.querySelector('#txtModalTypeID').value.trim();
     if(securityBadgeId != "" && documentId != ""){
-        CallPut(`${API_VISITOR_ACCESS}/VisitRecords/AssignSecBadge`,{
+        CallPost(`${API_VISITOR_ACCESS}/VisitRecords/AssignSecBadge`,{
             visitRecordId: visitRecordId,
             documentId: documentId,
             securityBadgeId: securityBadgeId
@@ -1150,7 +1150,7 @@ const handleSaveDeviceVisit = (visitRecordId) => {
         NotifyError("Missing data to capture");
         return;
     }
-    CallPut(`${API_VISITOR_ACCESS}/VisitRecords/AssignDeviceIT`,devices)
+    CallPost(`${API_VISITOR_ACCESS}/VisitRecords/AssignDeviceIT`,devices)
     .then(res => {
         NotifySuccess("Data saved successfully");
         fnCargarDatosVisitas();
@@ -1313,7 +1313,7 @@ const handleCheckIn = (visitRecord) => {
     CallGet(`${API_VISITOR_ACCESS}/VisitRecords/${visitRecord.visitRecordId}`)
     .then(res => {
         const datos = {...res.data, entryDate: moment().format("YYYY-MM-DDTHH:mm")}
-        CallPut(`${API_VISITOR_ACCESS}/VisitRecords/${visitRecord.visitRecordId}`, datos)
+        CallPost(`${API_VISITOR_ACCESS}/VisitRecords/${visitRecord.visitRecordId}`, datos)
         .then(r => {
             NotifySuccess("Data saved successfully");
             fnCargarDatosVisitas();
@@ -1330,7 +1330,7 @@ const handleCheckOut = (visitRecord) => {
     CallGet(`${API_VISITOR_ACCESS}/VisitRecords/${visitRecord.visitRecordId}`)
     .then(res => {
         const datos = {...res.data, departureDate: moment().format("YYYY-MM-DDTHH:mm")}
-        CallPut(`${API_VISITOR_ACCESS}/VisitRecords/${visitRecord.visitRecordId}`, datos)
+        CallPost(`${API_VISITOR_ACCESS}/VisitRecords/${visitRecord.visitRecordId}`, datos)
         .then(r => {
             NotifySuccess("Data saved successfully");
             fnCargarDatosVisitas();

@@ -159,7 +159,7 @@ namespace API_VisitorAccess.Controllers
 
         // PUT: api/VisitRecords/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPost("{id}")]
         public async Task<IActionResult> PutVisitRecord(int id, VisitRecord visitRecord)
         {
             if (id != visitRecord.VisitRecordId) return BadRequest();
@@ -277,7 +277,7 @@ namespace API_VisitorAccess.Controllers
         
         // PUT: api/VisitRecords/AssignSecBadge
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("AssignSecBadge")]
+        [HttpPost("AssignSecBadge")]
         public async Task<IActionResult> PutVisitRecordAssignSecBadge(VisitRecordAssignSecBadge visitRecordAssignSecBadge)
         {
             if (!VisitRecordExists(visitRecordAssignSecBadge.VisitRecordId)) return NotFound();
@@ -309,7 +309,7 @@ namespace API_VisitorAccess.Controllers
 
         // PUT: api/VisitRecords/AssignDeviceIT
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("AssignDeviceIT")]
+        [HttpPost("AssignDeviceIT")]
         public async Task<IActionResult> PutVisitRecordAssignDeviceIT(List<VisitRecordAssignDeviceIT> lstVisitRecordAssignDeviceIT)
         {
             if (lstVisitRecordAssignDeviceIT.Count() == 0) return NotFound();

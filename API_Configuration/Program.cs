@@ -15,7 +15,8 @@ builder.Services.AddCors(options =>
                           policy =>
                           {
                               policy.WithOrigins("http://est03des.magna.global",
-                                                  "http://127.0.0.1:5500")
+                                                  "http://127.0.0.1:5500",
+                                                  "http://13.68.142.29")
                                                   .AllowAnyHeader()
                                                   .AllowAnyMethod();
                           });
