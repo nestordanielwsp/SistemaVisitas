@@ -44,7 +44,7 @@ namespace API_VisitorAccess.Controllers
 
         // PUT: api/VisitorTypes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPost("{id}")]
         public async Task<IActionResult> PutVisitorType(int id, VisitorType visitorType)
         {
             if (id != visitorType.VisitorTypeId)

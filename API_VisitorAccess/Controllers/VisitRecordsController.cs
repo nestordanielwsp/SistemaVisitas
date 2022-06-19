@@ -71,7 +71,7 @@ namespace API_VisitorAccess.Controllers
                 ContactFullName = $"{vr.ContactEmployee.Name} {vr.ContactEmployee.LastName}".Trim(),
                 DeviceQty = searchVisitRecordDevices.Where(vrd => vrd.VisitRecordId == vr.VisitRecordId).Count(),
                 VisitDate = vr.VisitDate.Value,
-                HasCourse = (searchVisitRecordSecCourses.Where(src => src.VisitorId == vr.VisitorId.Value && src.ExpirationDate >= DateTime.Now.Date).Count() > 0),
+                HasCourse = vr.Visitor.VisitorTypeId == 1 || (searchVisitRecordSecCourses.Where(src => src.VisitorId == vr.VisitorId.Value && src.ExpirationDate >= DateTime.Now.Date).Count() > 0),
                 EntryDate = vr.EntryDate,
                 DepartureDate = vr.DepartureDate,
                 Status = vr.VisitStatus.Description,
@@ -496,7 +496,7 @@ namespace API_VisitorAccess.Controllers
         }
 
         // DELETE: api/VisitRecords/5
-        [HttpDelete("{id}")]
+        [HttpPost("{id}/baja")]
         public async Task<IActionResult> DeleteVisitRecord(int id)
         {
             var visitRecord = await _context.VisitRecord.FindAsync(id);
@@ -504,8 +504,7 @@ namespace API_VisitorAccess.Controllers
             {
                 return NotFound();
             }
-
-            _context.VisitRecord.Remove(visitRecord);
+            visitRecord.VisitStatusId = 4; // Deleted 
             await _context.SaveChangesAsync();
 
             return NoContent();

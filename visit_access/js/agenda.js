@@ -62,9 +62,10 @@ const fnCargarEstructuraTablaVisitas = () => {
                 data: "departureDate",
                 render: (data) => (data == null ? '---' : moment(data).format("DD MMM YYYY HH:mm"))
             },
+            { data: "status" },
             {
                 data: "visitRecordId",
-                render: (data) => `<button class="btn btn-danger" onclick="handleDeleteRecordSchedule(${data})"><i class="fa fa-trash m-0"></i></button>`
+                render: (data, type, full, meta) => ((full.status == 'Deleted') ? '---' : `<button class="btn btn-danger" onclick="handleDeleteRecordSchedule(${data})"><i class="fa fa-trash m-0"></i></button>`)
             }
         ],
         order: [[ 6, "desc" ]]
@@ -116,7 +117,7 @@ const handleSaveNewVisit = () => {
 }
 const handleDeleteRecordSchedule = (visitRecordId) => {
     NotifySure("It will not be possible to reverse the deletion", "Yes, delete!", () => {
-        CallDelete(`${API_VISITOR_ACCESS}/VisitRecords/${visitRecordId}`)
+        CallPost(`${API_VISITOR_ACCESS}/VisitRecords/${visitRecordId}/baja`)
         .then(res => {
             fnCargarDatosVisitas();
             NotifySuccess("Data saved successfully");

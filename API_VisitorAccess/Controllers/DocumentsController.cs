@@ -44,7 +44,7 @@ namespace API_VisitorAccess.Controllers
 
         // PUT: api/Documents/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPost("{id}")]
         public async Task<IActionResult> PutDocument(int id, Document document)
         {
             if (id != document.DocumentId)

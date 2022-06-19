@@ -122,8 +122,8 @@ const fnCargarEstructuraTablaVisitas = () => {
                 data: "visitRecordId",
                 render: (data, type, full, meta) => (
                     full.securityBadge == null ?
-                        `<button class="btn btn-outline-primary btn-sm" onclick='handleOpenModal("assign-gafete",${JSON.stringify(full)})' type="button">ASSIGN</button>` :
-                        `<button class="btn btn-outline-primary btn-sm" onclick='handleOpenModal("view-gafete",${JSON.stringify(full)})' type="button">${full.securityBadge} / ${full.document}</button>`
+                        (full.status == 'Deleted') ? '---' : `<button class="btn btn-outline-primary btn-sm" onclick='handleOpenModal("assign-gafete",${JSON.stringify(full)})' type="button">ASSIGN</button>` :
+                        (full.status == 'Deleted') ? '---' : `<button class="btn btn-outline-primary btn-sm" onclick='handleOpenModal("view-gafete",${JSON.stringify(full)})' type="button">${full.securityBadge} / ${full.document}</button>`
                 )
             },
             { data: "contactFullName" },
@@ -131,8 +131,8 @@ const fnCargarEstructuraTablaVisitas = () => {
                 data: "deviceQty",
                 render: (data, type, full, meta) => (
                     (full.entryDate == null && data === 0) ?
-                        `<button class="btn btn-outline-primary btn-sm" onclick='handleOpenModal("assign-devices",${JSON.stringify(full)})' type="button">SELECT</button>` :
-                        `<button class="btn btn-outline-primary btn-sm" onclick='handleOpenModal("view-devices",${JSON.stringify(full)})' type="button">${data} Devices</button>`
+                      (full.status == 'Deleted') ? '---' : `<button class="btn btn-outline-primary btn-sm" onclick='handleOpenModal("assign-devices",${JSON.stringify(full)})' type="button">SELECT</button>` :
+                      (full.status == 'Deleted') ? '---' : `<button class="btn btn-outline-primary btn-sm" onclick='handleOpenModal("view-devices",${JSON.stringify(full)})' type="button">${data} Devices</button>`
                 )
             },
             {
@@ -142,6 +142,8 @@ const fnCargarEstructuraTablaVisitas = () => {
             {
                 data: "entryDate",
                 render:(data, type, full, meta) => {
+                    if(data == null && full.status == 'Deleted')
+                        return '---';
                     if(data == null && !full.hasCourse)
                         return `<button class="btn btn-outline-primary btn-sm" onclick='handleOpenModal("view-visitSecCourse",${JSON.stringify(full)})' type="button">SAFETY COURSE</button>`;
                     if(data == null && full.hasCourse)
@@ -152,13 +154,16 @@ const fnCargarEstructuraTablaVisitas = () => {
             {
                 data: "departureDate",
                 render: (data, type, full, meta) => {
+                    if(data == null && full.status == 'Deleted')
+                        return '---';
                     if(data == null && full.entryDate == null)
                         return '---';
                     if(data == null)
                         return `<button class="btn btn-outline-primary btn-sm" onclick='handleCheckOut(${JSON.stringify(full)})' type="button">CHECK OUT</button>`;
                     return moment(data).format("DD MMM YYYY HH:mm");
                 }
-            }
+            },
+            { data: "status" }
         ],
         order: [[ 6, "desc" ]]
     });
@@ -566,7 +571,7 @@ const handleUpdateCompany = (companyId) => {
     const company = document.querySelector('#modal_ctrlEditCompanie').value.trim();
     const sts = (document.querySelector('#modal_ctrlSts').value.trim() === "1");
     if(company != ""){
-        CallPut(`${API_VISITOR_ACCESS}/Companies/${companyId}`,{
+        CallPost(`${API_VISITOR_ACCESS}/Companies/${companyId}`,{
             companyId: companyId,
             description: company,
             isEnabled: sts
@@ -641,7 +646,7 @@ const handleUpdateDocument = (documentId) => {
     const doc = document.querySelector('#modal_ctrlNewIDCard').value.trim();
     const sts = (document.querySelector('#modal_ctrlSts').value.trim() === "1");
     if(doc != ""){
-        CallPut(`${API_VISITOR_ACCESS}/Documents/${documentId}`,{
+        CallPost(`${API_VISITOR_ACCESS}/Documents/${documentId}`,{
             documentId: documentId,
             description: doc,
             isEnabled: sts
@@ -716,7 +721,7 @@ const handleUpdateDeviceType = (deviceId) => {
     const device = document.querySelector('#modal_ctrlNewTipoDisp').value.trim();
     const sts = (document.querySelector('#modal_ctrlSts').value.trim() === "1");
     if(device != ""){
-        CallPut(`${API_VISITOR_ACCESS}/DeviceTypes/${deviceId}`,{
+        CallPost(`${API_VISITOR_ACCESS}/DeviceTypes/${deviceId}`,{
             deviceTypeId: deviceId,
             description: device,
             isEnabled: sts
@@ -791,7 +796,7 @@ const handleUpdateVisitorType = (visitorTypeId) => {
     const visitorType = document.querySelector('#modal_ctrlNewType').value.trim();
     const sts = (document.querySelector('#modal_ctrlSts').value.trim() === "1");
     if(visitorType != ""){
-        CallPut(`${API_VISITOR_ACCESS}/VisitorTypes/${visitorTypeId}`,{
+        CallPost(`${API_VISITOR_ACCESS}/VisitorTypes/${visitorTypeId}`,{
             visitorTypeId: visitorTypeId,
             description: visitorType,
             isEnabled: sts
@@ -882,7 +887,7 @@ const handleUpdateSecCourse = (securityCourseId) => {
             isEnabled: sts
         });
 
-        CallPut(`${API_VISITOR_ACCESS}/SecurityCourses/${securityCourseId}`,bodyFormData)
+        CallPost(`${API_VISITOR_ACCESS}/SecurityCourses/${securityCourseId}`,bodyFormData)
         .then(res => {
             NotifySuccess("Data saved successfully");
             fnCargarDatosSecCourses();
@@ -943,7 +948,7 @@ const fnGetFooterSecCourse = (course) => {
     )
 }
 const handleDeleteSecCourse = (securityCourseId) => {
-    CallDelete(`${API_VISITOR_ACCESS}/SecurityCourses/${securityCourseId}`)
+    CallPost(`${API_VISITOR_ACCESS}/SecurityCourses/${securityCourseId}/baja`)
     .then(res => {
         NotifySuccess("Data saved successfully");
         fnCargarDatosSecCourses();
@@ -972,7 +977,7 @@ const handleUpdateSecBadge = (gafeteId) => {
     const gafete = document.querySelector('#modal_ctrlNewGafete').value.trim();
     const sts = (document.querySelector('#modal_ctrlSts').value.trim() === "1");
     if(gafete != ""){
-        CallPut(`${API_VISITOR_ACCESS}/SecurityBadges/${gafeteId}`,{
+        CallPost(`${API_VISITOR_ACCESS}/SecurityBadges/${gafeteId}`,{
             securityBadgeId: gafeteId,
             description: gafete,
             isEnabled: sts

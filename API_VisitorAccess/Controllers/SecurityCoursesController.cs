@@ -56,7 +56,7 @@ namespace API_VisitorAccess.Controllers
         }
         // PUT: api/SecurityCourses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPost("{id}")]
         public async Task<IActionResult> PutSecurityCourse(int id, [FromForm]SecurityCourseUpdate securityCourseUpdate)
         {
             if (id != securityCourseUpdate.SecurityCourseId) return BadRequest();
@@ -77,10 +77,17 @@ namespace API_VisitorAccess.Controllers
                     string filesAppPath = _config.GetValue<string>("FilesAppPath");
                     string pathToSave = Path.Combine(filesAppPath, name_folder, name_file);
 
-                    Directory.CreateDirectory(Path.Combine(filesAppPath, name_folder));
-                    using (var stream = System.IO.File.Create(pathToSave))
+                    try
                     {
-                        await securityCourseUpdate.FileCourse.CopyToAsync(stream);
+                        //Directory.CreateDirectory(Path.Combine(filesAppPath, name_folder));
+                        using (var stream = System.IO.File.Create(pathToSave))
+                        {
+                            await securityCourseUpdate.FileCourse.CopyToAsync(stream);
+                        }
+                    }
+                    catch
+                    {
+
                     }
                     //ELIMINA ARCHIVO PREVIO
                     if (temp.FileName != null)
@@ -154,10 +161,17 @@ namespace API_VisitorAccess.Controllers
                 string filesAppPath = _config.GetValue<string>("FilesAppPath");
                 string pathToSave = Path.Combine(filesAppPath, name_folder, name_file);
 
-                Directory.CreateDirectory(Path.Combine(filesAppPath, name_folder));
-                using (var stream = System.IO.File.Create(pathToSave))
+                try
                 {
-                    await securityCourseCreate.FileCourse.CopyToAsync(stream);
+                    //Directory.CreateDirectory(Path.Combine(filesAppPath, name_folder));
+                    using (var stream = System.IO.File.Create(pathToSave))
+                    {
+                        await securityCourseCreate.FileCourse.CopyToAsync(stream);
+                    }
+                }
+                catch  
+                {
+
                 }
 
                 SecurityCourse securityCourse = new SecurityCourse
@@ -183,7 +197,7 @@ namespace API_VisitorAccess.Controllers
         }
 
         // DELETE: api/SecurityCourses/5
-        [HttpDelete("{id}")]
+        [HttpPost("{id}/baja")]
         public async Task<IActionResult> DeleteSecurityCourse(int id)
         {
             var securityCourse = await _context.SecurityCourse.FindAsync(id);
