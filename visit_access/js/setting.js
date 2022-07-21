@@ -13,20 +13,11 @@ const fnCargarUsuario = () => {
     if(userRoutes.filter(path => path === "/schedule").length === 0){
         document.querySelector(".idAgenda").style.setProperty("display","none"); 
     }
-    if(userRoutes.filter(path => path === "/setting").length === 0){
-        document.querySelector(".idSetting").style.setProperty("display","none"); 
-    }
     if(userRoutes.filter(path => path === "/visits").length === 0){
-        document.querySelector(".idVisitas").style.setProperty("display","none");
-        if(userRoutes.filter(path => path === "/schedule").length > 0){
-            location.href = "./schedule.html";
-        } 
-        else if(userRoutes.filter(path => path === "/setting").length > 0){
-            location.href = "./setting.html";
-        } 
-        else{
-            location.href = "./login.html";
-        }
+        document.querySelector(".idVisitas").style.setProperty("display","none"); 
+    }
+    if(userRoutes.filter(path => path === "/setting").length === 0){
+        location.href = "./login.html";
     }
 
     if(infoUser == null) location.href = "./login.html";
@@ -46,8 +37,8 @@ const fnCargarUsuario = () => {
 const fnCargarFechasInicioFin = () => {
     dateFilters.fechaIni = moment().add(-30,'days');
     dateFilters.fechaFin = moment().add(30,'days');
-    document.querySelector('#txt_finicio').textContent = moment(dateFilters.fechaIni).format("DD/MM/YYYY");
-    document.querySelector('#txt_ffin').textContent = moment(dateFilters.fechaFin).format("DD/MM/YYYY");
+    //document.querySelector('#txt_finicio').textContent = moment(dateFilters.fechaIni).format("DD/MM/YYYY");
+    //document.querySelector('#txt_ffin').textContent = moment(dateFilters.fechaFin).format("DD/MM/YYYY");
 }
 const fnCargarDatosVisitas = () => {
     CallGet(`${API_VISITOR_ACCESS}/VisitRecords/Schedule?`+
@@ -1514,14 +1505,14 @@ const handleOpenModal = (option, obj = null) => {
 }
 (() => {
     fnCargarUsuario();
-    fnCargarFechasInicioFin();
-    fnCargarEstructuraTablaVisitas();
+    //fnCargarFechasInicioFin();
+    //fnCargarEstructuraTablaVisitas();
     fnCargarEstructuraTablaCompanies();
     fnCargarEstructuraTablaGafetes();
     fnCargarEstructuraTablaDocuments();
     fnCargarEstructuraTablaDeviceType();
     fnCargarEstructuraTablaVisitType();
     fnCargarEstructuraTablaSecCourse();
-    if(infoUser)
-        fnCargarDatosVisitas();
+    //if(infoUser)
+        //fnCargarDatosVisitas();
 })();

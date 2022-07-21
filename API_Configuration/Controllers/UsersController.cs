@@ -133,7 +133,7 @@ namespace API_Configuration.Controllers
         }
 
         //PUT
-        [HttpPut("{id}", Name = "PutUser")]
+        [HttpPost("{id}", Name = "PutUser")]
         public async Task<ActionResult> PutAsync(int id, [FromForm] UserUpdateDto userUpdateDto)
         {
             var userFromRepo = repository.GetUserById(id);
@@ -171,7 +171,7 @@ namespace API_Configuration.Controllers
             return NoContent();
         }
 
-        [HttpPut("ChangePassword", Name = "PutUserChangePassword")]
+        [HttpPost("ChangePassword", Name = "PutUserChangePassword")]
         public ActionResult PutChangePasswordAsync(UserPasswordDto userPasswordDto)
         {
             var userItem = repository.GetUserById(userPasswordDto.UserId);
@@ -192,7 +192,7 @@ namespace API_Configuration.Controllers
         }
 
 
-        [HttpPut("bulkDisable", Name = "PutDisableUsers")]
+        [HttpPost("bulkDisable", Name = "PutDisableUsers")]
         public ActionResult PutDisableAll(IdListUpdateDto idListUpdateDto)
         {
             var usersFromRepo = repository.GetAllUsersByIds(idListUpdateDto);
@@ -212,7 +212,7 @@ namespace API_Configuration.Controllers
             return NoContent();
         }
 
-        [HttpPut("deleteUserRoles", Name = "PutDeleteUserRole")]
+        [HttpPost("deleteUserRoles", Name = "PutDeleteUserRole")]
         public ActionResult DeleteUserRoleAsync(IdListDeleteDto idListDeleteDto)
         {
             repository.DeleteBulkUserRole(idListDeleteDto);

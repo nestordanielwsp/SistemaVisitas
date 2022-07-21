@@ -186,7 +186,7 @@ const RecentViewsTable = ({ tableData, setRefreshViews }) => {
       idList: viewIds
     }
     try {
-      let res = await myAxios('configuration').put(`Views/bulkDisable`, _viewData);
+      let res = await myAxios('configuration').post(`Views/bulkDisable`, _viewData);
 
       if(res.status >= 200 && res.status < 300){
         notifySuccess("Has been saved successfully");

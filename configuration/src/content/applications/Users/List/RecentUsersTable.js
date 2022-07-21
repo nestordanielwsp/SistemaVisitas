@@ -191,7 +191,7 @@ const RecentUsersTable = ({ tableData, setRefreshUsers }) => {
       idList: userIds
     }
     try {
-      let res = await myAxios('configuration').put(`Users/bulkDisable`, _userData);
+      let res = await myAxios('configuration').post(`Users/bulkDisable`, _userData);
 
       if(res.status >= 200 && res.status < 300){
         notifySuccess("Has been saved successfully");

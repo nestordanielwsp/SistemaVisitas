@@ -188,7 +188,7 @@ const RecentModulesTable = ({ tableData, setRefreshModules }) => {
       idList: moduleIds
     }
     try {
-      let res = await myAxios('configuration').put(`Modules/bulkDisable`, _moduleData);
+      let res = await myAxios('configuration').post(`Modules/bulkDisable`, _moduleData);
 
       if(res.status >= 200 && res.status < 300){
         notifySuccess("Has been saved successfully");

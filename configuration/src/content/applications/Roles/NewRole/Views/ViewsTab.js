@@ -134,7 +134,7 @@ function ViewsTab({GetRole, views, role}) {
       idList: roleViewId
     }
     try {
-      let res = await myAxios('configuration',auth()).put(`Roles/deleteRoleViews`, _roleViewData);
+      let res = await myAxios('configuration',auth()).post(`Roles/deleteRoleViews`, _roleViewData);
 
       if(res.status >= 200 && res.status < 300){
         notifySuccess("Has been saved successfully");

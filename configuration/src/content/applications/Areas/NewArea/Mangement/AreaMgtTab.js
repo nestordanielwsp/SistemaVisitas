@@ -67,7 +67,7 @@ function AreaMgtTab({isNewArea}) {
     let _areaData = { ...areaData };
 
     try {
-      let res = await myAxios('configuration').put(`Areas/${_areaData.areaId}`, _areaData);
+      let res = await myAxios('configuration').post(`Areas/${_areaData.areaId}`, _areaData);
 
       if(res.status >= 200 && res.status < 300){
         notifySuccess("Has been saved successfully");

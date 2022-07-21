@@ -71,7 +71,7 @@ function RoleMgtTab({isNewRole, GetRole, roleData, setRoleData}) {
     let _roleData = { ...roleData };
 
     try {
-      let res = await myAxios('configuration').put(`Roles/${_roleData.roleId}`, _roleData);
+      let res = await myAxios('configuration').post(`Roles/${_roleData.roleId}`, _roleData);
 
       if(res.status >= 200 && res.status < 300){
         notifySuccess("Has been saved successfully");

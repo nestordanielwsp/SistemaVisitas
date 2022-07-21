@@ -1,5 +1,7 @@
-const API_CONFIGURATION = `http://est03des.magna.global:5003/api`;
-const API_VISITOR_ACCESS = `http://est03des.magna.global:5002/api`;
+const API_CONFIGURATION1= `http://est03des.magna.global:5003/api`;
+const API_VISITOR_ACCESS1 = `http://est03des.magna.global:5002/api`; 
+const API_VISITOR_ACCESS= `http://localhost:5000/api`; 
+const API_CONFIGURATION = `http://localhost:5001/api`; 
 const MODULE = "VISITOR ACCESS";
 const VERSION = "1.0.7";
 const PATH_FILES = `${window.location.origin}/files_app`;

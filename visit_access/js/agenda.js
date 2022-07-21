@@ -14,7 +14,23 @@ const fnCargarFechasInicioFin = () => {
 const fnCargarUsuario = () => {
     infoUser = JSON.parse(sessionStorage.getItem("_authVisitorAccess"));
     const userRoutes = JSON.parse(sessionStorage.getItem("_authRoutesVisitorAccess"));
-    if(userRoutes.filter(path => path === "/schedule").length === 0) location.href = "./login.html";
+
+    if(userRoutes.filter(path => path === "/visits").length === 0){
+        document.querySelector(".idVisitas").style.setProperty("display","none"); 
+    }
+    if(userRoutes.filter(path => path === "/setting").length === 0){
+        document.querySelector(".idSetting").style.setProperty("display","none"); 
+    }
+    if(userRoutes.filter(path => path === "/schedule").length === 0){
+        document.querySelector(".idAgenda").style.setProperty("display","none");
+        if(userRoutes.filter(path => path === "/setting").length > 0){
+            location.href = "./setting.html";
+        } 
+        else{
+            location.href = "./login.html";
+        }
+    }
+ 
     if(infoUser == null) location.href = "./login.html";
 
     if(infoUser.image == "" || infoUser.image == null){

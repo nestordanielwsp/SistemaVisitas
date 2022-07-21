@@ -58,7 +58,7 @@ namespace API_Configuration.Controllers
         
 
         //PUT
-        [HttpPut("{id}", Name = "PutView")]
+        [HttpPost("{id}", Name = "PutView")]
         public ActionResult Put(int id, ViewUpdateDto viewUpdateDto)
         {
             var viewFromRepo = repository.GetViewById(id);
@@ -75,7 +75,7 @@ namespace API_Configuration.Controllers
             return NoContent();
         }
 
-        [HttpPut("bulkDisable", Name = "PutDisableViews")]
+        [HttpPost("bulkDisable", Name = "PutDisableViews")]
         public ActionResult PutDisableAll(IdListUpdateDto idListUpdateDto)
         {
             var viewsFromRepo = repository.GetAllViewsByIds(idListUpdateDto);

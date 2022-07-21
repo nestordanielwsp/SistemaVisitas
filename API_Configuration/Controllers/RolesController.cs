@@ -50,7 +50,7 @@ namespace API_Configuration.Controllers
         }
 
         //PUT
-        [HttpPut("{id}", Name = "PutRole")]
+        [HttpPost("{id}", Name = "PutRole")]
         public ActionResult Put(int id, RoleUpdateDto roleUpdateDto)
         {
             var roleFromRepo = repository.GetRoleById(id);
@@ -67,7 +67,7 @@ namespace API_Configuration.Controllers
             return NoContent();
         }
 
-        [HttpPut("bulkDisable", Name = "PutDisableRoles")]
+        [HttpPost("bulkDisable", Name = "PutDisableRoles")]
         public ActionResult PutDisableAll(IdListUpdateDto idListUpdateDto)
         {
             var rolesFromRepo = repository.GetAllRolesByIds(idListUpdateDto);
@@ -87,7 +87,7 @@ namespace API_Configuration.Controllers
             return NoContent();
         }
 
-        [HttpPut("deleteRoleViews", Name = "BulkDeleteRoleViews")]
+        [HttpPost("deleteRoleViews", Name = "BulkDeleteRoleViews")]
         public ActionResult DeleteRoleViews(IdListDeleteDto idListDeleteDto)
         {
             repository.DeleteBulkRoleView(idListDeleteDto);

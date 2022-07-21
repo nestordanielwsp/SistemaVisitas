@@ -56,63 +56,53 @@
             </div>
         </div>
         <ul class="app-menu">
-            <li class="idVisitas" ><a class="app-menu__item active" data-tab="#tabVisitas" href="#"><i class="app-menu__icon fa fa-dashboard"></i><span
+            <li class="idVisitas"><a class="app-menu__item" href="./Visits.html"><i class="app-menu__icon fa fa-dashboard"></i><span
                         class="app-menu__label">Visits - Suppliers</span></a></li>
             <li class="idAgenda"><a class="app-menu__item" href="./Schedule.html"><i class="app-menu__icon fa fa-dashboard"></i><span
                             class="app-menu__label">Visit schedule</span></a></li>
-            <li class="idSetting"><a class="app-menu__item" href="./Setting.html"><i class="app-menu__icon fa fa-dashboard"></i><span
-                                class="app-menu__label">Setting</span></a></li> 
+
+            <li class="treeview"><a class="app-menu__item active" href="#" data-toggle="treeview"><i
+                        class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Setting</span><i
+                        class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu" id="menuConfig"> 
+                    <li><a class="treeview-item" href="#" onclick="fnCargarDatosCompanies()" data-tab="#tabCatCompanies">
+                        <i class="icon fa fa-circle-o"></i> Companies</a></li>
+                    <li><a class="treeview-item" href="#" onclick="fnCargarDatosSecBadges()" data-tab="#tabCatGafetes">
+                        <i class="icon fa fa-circle-o"></i> Security Badges</a></li>
+                    <li><a class="treeview-item" href="#" onclick="fnCargarDatosDocuments()" data-tab="#tabCatID">
+                        <i class="icon fa fa-circle-o"></i> ID Cards</a></li>
+                    <li><a class="treeview-item" href="#" onclick="fnCargarDatosDeviceTypes()" data-tab="#tabCatTiposDisp">
+                        <i class="icon fa fa-circle-o"></i> Device Types</a></li>
+                    <li><a class="treeview-item" href="#" onclick="fnCargarDatosVisitorTypes()" data-tab="#tabCatTipoVisita">
+                        <i class="icon fa fa-circle-o"></i> Type of visit / supplier</a></li>
+                    <li><a class="treeview-item" href="#" onclick="fnCargarDatosSecCourses()" data-tab="#tabCatCursos">
+                        <i class="icon fa fa-circle-o"></i> Safety courses</a></li>
+
+                </ul>
+            </li>
         </ul>
     </aside>
     <main class="app-content">
         <div id="tabVisitas" class="active">
             <div class="app-title">
                 <div>
-                    <h1><i class="fa fa-list-alt"></i> Visits / Suppliers</h1>
+                    <h1><i class="fa fa-list-alt"></i> Visits / Settings</h1>
                 </div>
                 <ul class="app-breadcrumb breadcrumb">
                     <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-                    <li class="breadcrumb-item"><a href="#">Visits - Suppliers</a></li>
+                    <li class="breadcrumb-item"><a href="#">Visits - Settings</a></li>
                 </ul>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="tile mb-2">
                         <div class="tile-body">
-                            <div class="row">
-                                <div class="col-7" onclick="handleOpenModal('filters')">
-                                    <button class="btn btn-outline-primary btn-sm" type="button">
-                                        <span class="fa fa-filter m-0"></span>
-                                    </button>
-                                    <span class="badge badge-primary p-2 mr-1" style="font-size: 10px;color: #4298b5; background-color: #FFF;border:2px solid #4298b5;cursor:pointer;">
-                                        <span id="txt_finicio">01/02/2020</span> - <span id="txt_ffin">29/02/2020</span>
-                                    </span>
-                                </div>
-                                <div class="col-5 text-right">
-                                    <button class="btn btn-danger btn-sm px-3" onclick="handleOpenModal('new-visit')" type="button"><span class="fa fa-plus m-0"></span> Visit / Supplier</button>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="tile">
                         <div class="tile-body">
-                            <table class="table table-hover table-bordered table-striped"" id="tbVisitas" style="width: 100%;">
-                                <thead>
-                                  <tr>
-                                    <th width="80px">Folio</th>
-                                    <th>Visit / Supplier</th>
-                                    <th>Company</th>
-                                    <th>Gafete</th>
-                                    <th>Magna Contact</th>
-                                    <th>IT Device</th>
-                                    <th>Visit Date</th>
-                                    <th>Entry</th>
-                                    <th>Out</th>
-                                    <th>Status</th>
-                                  </tr>
-                                </thead>
-                                <tbody></tbody>
-                              </table>
+                            
                         </div>
                     </div>
                 </div>
@@ -386,7 +376,7 @@
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', () => {
                 const scripts = [
-                    `./js/visitas.js?v=${VERSION}`
+                    `./js/setting.js?v=${VERSION}`
                 ];
                 scripts.forEach(script => {
                     if(document.querySelector(`script[src="${script}"]`) == null){

@@ -54,7 +54,7 @@ namespace API_Configuration.Controllers
             return CreatedAtRoute(nameof(GetById), new { Id = areaReadDto.AreaId }, areaReadDto);
         }
 
-        [HttpPut("{id}",Name ="PutArea")]
+        [HttpPost("{id}",Name ="PutArea")]
         public ActionResult Put(int id,AreaUpdateDto areaUpdateDto)
         {
             var areaFromRepo = repository.GetAreaById(id);
@@ -71,7 +71,7 @@ namespace API_Configuration.Controllers
             return NoContent();
         }
 
-        [HttpPut("bulkDisable", Name = "PutDisableAreas")]
+        [HttpPost("bulkDisable", Name = "PutDisableAreas")]
         public ActionResult PutDisableAll(IdListUpdateDto idListUpdateDto)
         {
             var areasFromRepo = repository.GetAllAreasByIds(idListUpdateDto);

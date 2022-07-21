@@ -26,7 +26,7 @@ const handleLogin = async () => {
                 }
               }
             }
-        }
+        } 
 
         if(userRoutes.filter(path => path === "/visits").length > 0){
             sessionStorage.setItem("_authVisitorAccess", JSON.stringify(res.data.user));
@@ -35,7 +35,7 @@ const handleLogin = async () => {
             //REDIRECCIONANDO
             location.href = "./Visits.html";
             return;
-        }
+        } 
         if(userRoutes.filter(path => path === "/schedule").length > 0){
             sessionStorage.setItem("_authVisitorAccess", JSON.stringify(res.data.user));
             sessionStorage.setItem("_authTokenVisitorAccess", JSON.stringify(res.data.jwtToken));
@@ -43,7 +43,15 @@ const handleLogin = async () => {
             //REDIRECCIONANDO
             location.href = "./Schedule.html";
             return;
-        }
+        } 
+        if(userRoutes.filter(path => path === "/setting").length > 0){
+            sessionStorage.setItem("_authVisitorAccess", JSON.stringify(res.data.user));
+            sessionStorage.setItem("_authTokenVisitorAccess", JSON.stringify(res.data.jwtToken));
+            sessionStorage.setItem("_authRoutesVisitorAccess", JSON.stringify(userRoutes));
+            //REDIRECCIONANDO
+            location.href = "./Setting.html";
+            return;
+        } 
         NotifyError("You do not have permission in the app");
         return;
     }).catch(error => {

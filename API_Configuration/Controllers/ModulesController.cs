@@ -54,7 +54,7 @@ namespace API_Configuration.Controllers
             return CreatedAtRoute(nameof(GetById), new { Id = moduleReadDto.ModuleId }, moduleReadDto);
         }
 
-        [HttpPut("{id}", Name = "PutModule")]
+        [HttpPost("{id}", Name = "PutModule")]
         public ActionResult Put(int id, ModuleUpdateDto moduleUpdateDto)
         {
             var moduleFromRepo = repository.GetModuleById(id);
@@ -71,7 +71,7 @@ namespace API_Configuration.Controllers
             return NoContent();
         }
         
-        [HttpPut("bulkDisable", Name = "PutDisableModules")]
+        [HttpPost("bulkDisable", Name = "PutDisableModules")]
         public ActionResult PutDisableAll(IdListUpdateDto idListUpdateDto)
         {
             var modulesFromRepo = repository.GetAllModulesByIds(idListUpdateDto);

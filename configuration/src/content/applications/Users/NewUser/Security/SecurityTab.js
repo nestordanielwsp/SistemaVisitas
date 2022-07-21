@@ -89,7 +89,7 @@ function SecurityTab({userData, setUserData, GetUser}) {
     buildFormData(bodyFormData, _userData);
 
     try {
-      let res = await myAxios('configuration',auth()).put(`Users/${_userData.userId}`, bodyFormData);
+      let res = await myAxios('configuration',auth()).post(`Users/${_userData.userId}`, bodyFormData);
 
       if(res.status >= 200 && res.status < 300){
         notifySuccess("Has been saved successfully");
@@ -115,7 +115,7 @@ function SecurityTab({userData, setUserData, GetUser}) {
     };
 
     try {
-      let res = await myAxios('configuration',auth()).put(`Users/ChangePassword`, _passData);
+      let res = await myAxios('configuration',auth()).post(`Users/ChangePassword`, _passData);
 
       if(res.status >= 200 && res.status < 300){
         notifySuccess("Has been saved successfully");

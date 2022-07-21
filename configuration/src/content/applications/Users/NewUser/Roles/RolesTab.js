@@ -123,7 +123,7 @@ function RolesTab({roles, GetUser, userId}) {
       idList: userRoleId
     }
     try {
-      let res = await myAxios('configuration',auth()).put(`Users/deleteUserRoles`, _userRoleData);
+      let res = await myAxios('configuration',auth()).post(`Users/deleteUserRoles`, _userRoleData);
 
       if(res.status >= 200 && res.status < 300){
         notifySuccess("Has been saved successfully");

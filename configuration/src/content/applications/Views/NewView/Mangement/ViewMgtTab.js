@@ -96,7 +96,7 @@ function ViewMgtTab({isNewView}) {
     };
 
     try {
-      let res = await myAxios('configuration').put(`Views/${_viewData.viewId}`, _viewData);
+      let res = await myAxios('configuration').post(`Views/${_viewData.viewId}`, _viewData);
 
       if(res.status >= 200 && res.status < 300){
         notifySuccess("Has been saved successfully");
